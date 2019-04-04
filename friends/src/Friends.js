@@ -1,32 +1,40 @@
 import React from 'react';
-import axios from 'axios'
 
-class Friends extends React.Component {
-    constructor() {
-        super();
-        this.state = ({
-            friends: []
-        })
-    }
 
-    componentDidMount() {
-        axios
-            .get('http://localhost:5000/friends')
-            .then(response => {
-                this.setState({ friends: response.friends })
-                console.log(response)
-            })
-            .catch(error => {
-                console.log('hi bitch')
-            })
-            console.log('done')
-    }
+const Friends = props => {
+console.log(props)
+        // console.log('string')
+        const style = {
+            border: '1px solid black',
+            width: '60%',
+            boxShadow: '5px 5px 5px #D2D2D2',
+            margin: '16px auto',
+            borderRadius: '3px',
+            background: 'gray',
+            color: '#FFE135'
+        }
 
-    render() {
+        const btnStyle = {
+            width: '35%',
+            height: '30px',
+            margin: '8px auto',
+            borderRadius: '6px',
+            boxShadow: '1px 1px 1px #D2D2D2'
+        }
+
         return (
-            <p>Hello</p>
+            <>
+                {props.friends.map(( eachItem, index ) => (
+                    <div style={style} key={index}>
+                        <h2>{eachItem.name}</h2>
+                        <h3>{eachItem.age}</h3>
+                        <h4>{eachItem.email}</h4>
+                        <button style={btnStyle} onClick={(event) => props.deleteFriend(event, eachItem.id)} >Delete Friend</button>
+                    </div>
+                ))}
+            </>
         )
     }
-}
+
 
 export default Friends
