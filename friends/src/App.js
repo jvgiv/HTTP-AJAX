@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import axios from 'axios'
 import Friends from './Friends'
 import { withRouter, Route, NavLink } from 'react-router-dom'
@@ -95,10 +96,12 @@ class App extends Component {
         <Route path='/add-friend' render={( props ) => <AddFriend {...props} addFriend={this.addFriend} btnStyle={this.btnStyle} />} />
 
         <Route exact path='/' render={(props) => <Friends {...props} friends={this.state.friends} deleteFriend={this.deleteFriend} />} />
+
       </div>
     );
   }
 }
 
 export default withRouter(App)
+
 
