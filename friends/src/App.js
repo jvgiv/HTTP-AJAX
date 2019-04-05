@@ -33,7 +33,7 @@ class App extends Component {
       .post('http://localhost:5000/friends', newFriend)
       .then(response => {
         this.setState({ friends: response.data });
-        this.props.history.push('/friends');
+        this.props.history.push('/');
       })
       .catch(error => {
         console.log(error)
@@ -63,21 +63,38 @@ class App extends Component {
       border: '1px solid black',
       borderRadius: '3px',
       background: 'gray',
-      color: 'white'
+      color: '#FFE135',
+      boxShadow: '5px 5px 5px #D2D2D2',
+    }
+
+    const navStyle = {
+      textDecoration: 'none',
+      fontSize: '25px',
+      margin: '16px auto',
+      border: '1px solid black',
+      borderRadius: '3px',
+      background: 'gray',
+      color: '#FFE135',
+      width: '60%',
+      boxShadow: '5px 5px 5px #D2D2D2',
+      display: 'flex',
+      justifyContent: 'center'
     }
 
 
     return (
       <div className="App">
-      <h1 style={headline}>Welcome to the Friends List</h1>
-      <nav>
-        <NavLink exact to='/'>Home</NavLink>
-        <br/>
-        <NavLink exact to='add-friend'>Add Friend</NavLink>
+        <h1 style={headline}>Welcome to the Friends List</h1>
         
-      </nav>
-      <Route path='/add-friend' render={( props ) => <AddFriend {...props} addFriend={this.addFriend} btnStyle={this.btnStyle} />} />
-      <Route exact path='/' render={(props) => <Friends {...props} friends={this.state.friends} deleteFriend={this.deleteFriend} />} />
+        <nav >
+          <NavLink style={navStyle} exact to='/'>Home</NavLink>
+          
+          <NavLink style={navStyle} exact to='add-friend'>Add Friend</NavLink>
+        </nav>
+
+        <Route path='/add-friend' render={( props ) => <AddFriend {...props} addFriend={this.addFriend} btnStyle={this.btnStyle} />} />
+
+        <Route exact path='/' render={(props) => <Friends {...props} friends={this.state.friends} deleteFriend={this.deleteFriend} />} />
       </div>
     );
   }
